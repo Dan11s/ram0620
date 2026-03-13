@@ -112,5 +112,3 @@ if __name__ == "__main__":
     #lahing(sõdalane, maag)
     #lahing(vibukütt, sõdalane)
     lahing(maag, vibukütt)
-
-
