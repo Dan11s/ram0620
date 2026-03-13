@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import random
 
+#Abstraktne klass: defineerib üldise tegelase, kuid ei rakenda kõiki meetodeid
 class Tegelane(ABC):
     def __init__(self, nimi, elud):
         self._nimi = nimi
@@ -8,9 +9,11 @@ class Tegelane(ABC):
 
     @abstractmethod
     def runda(self, vastane):
+        # Abstraktsioon: iga alamklass peab defineerima ründeviisi
         pass
 
     def vota_kahju(self, kahju):
+        # Kapseldamine: elu vähenemine toimub läbi meetodi, mitte otseselt
         self._elud -= kahju
         if self._elud < 0:
             self._elud = 0
@@ -21,17 +24,19 @@ class Tegelane(ABC):
     def seisund(self):
         return f"{self._nimi}: {self._elud} elu"
 
-
+# Pärilus: Sodalane on Tegelane
 class Sodalane(Tegelane):
 
     def __init__(self, nimi):
         super().__init__(nimi, 100)
 
+    # Polümorfism: runda käitub teistmoodi sõltuvalt tegelase tüübist
     def runda(self, vastane):
         kahju = random.randint(10, 20)
         vastane.vota_kahju(kahju)
         print(f"{self._nimi} ründab {vastane._nimi} ja teeb {kahju} kahju")
 
+# Pärilus ja kapseldamine: maagil on lisaks eludele ka mana
 class Maag(Tegelane):
 
     def __init__(self, nimi):
@@ -41,6 +46,7 @@ class Maag(Tegelane):
     def seisund(self):
         return f"{self._nimi}: {self._elud} elu ja {self._mana} manat"
 
+    # Polümorfism: runda käitub teistmoodi sõltuvalt tegelase tüübist
     def runda(self, vastane):
 
         if self._mana >= 5:
@@ -55,6 +61,7 @@ class Maag(Tegelane):
             self._mana += lisa_mana
             print(f"Maagil puudub mana. Kogub {lisa_mana} manat juurde.")
 
+# Pärilus ja kapseldamine: vibukütil on nooled
 class Vibukutt(Tegelane):
 
     def __init__(self, nimi):
@@ -64,6 +71,7 @@ class Vibukutt(Tegelane):
     def seisund(self):
         return f"{self._nimi}: {self._elud} elu ja {self._nooled} noolt"
 
+    # Polümorfism: runda käitub teistmoodi sõltuvalt tegelase tüübist
     def runda(self, vastane):
 
         if self._nooled >= 1:
@@ -81,6 +89,7 @@ class Vibukutt(Tegelane):
 
 def lahing(t1, t2):
 
+    # Polümorfism: runda meetod käitub erinevalt sõltuvalt tegelase tüübist
     print(f"Algab lahing: {t1._nimi} vs {t2._nimi}")
     print(f"{t1.seisund()} | {t2.seisund()}")
 
