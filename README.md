@@ -1,1 +1,2 @@
-# ram0620
+# Täisarvu konvertor
+Programm teisendab täisarvu roomanumbriks
