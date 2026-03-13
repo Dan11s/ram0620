@@ -121,3 +121,6 @@ if __name__ == "__main__":
     #lahing(sõdalane, maag)
     #lahing(vibukütt, sõdalane)
     lahing(maag, vibukütt)
+
+#Lisades uue tegelase on vaja:
+#Kirjutada üle seisund() ja runda()
